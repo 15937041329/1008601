@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>人脸认证</title>
+	<link rel="shortcut icon" href="./videorealname/portraitReservation/css/images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./lib/popup/magnific-popup.css"></link>
+	<link rel="stylesheet" href="./videorealname/portraitReservation/css/common.css"></link>
+	<link rel="stylesheet" href="./videorealname/portraitReservation/css/sc-head.css?ver=20190820"></link>
+	<script src="./common/checkAgent.js"></script>
+	<!-- 腾讯统计 -->
+<script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500648287");
+  		mta.setAttribute("cid", "500648292");
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
+<script type="text/javascript">
+     setTimeout(function(){
+         try {
+             MtaH5.clickStat('yuyuerenzheng1',{'schradhtml':'true'})
+         } catch (e) {
+             try {
+                 console.log(e.name + ": " + e.message);
+             } catch (e) {
+             }
+         }
+     }, 500)
+</script>
+
+
+
+	<script src="./lib/jquery/jquery.js"></script>
+	<script type="text/javascript">
+	    function getSize(obj,iptObj){
+	        maxWidth = $(obj).width(),
+	        maxHeight = $(obj).height();
+	        $('#'+iptObj).width(maxWidth).height(maxHeight);
+	        $('#'+iptObj).css("top",$(obj).position().top);
+	    }
+	    // function creatImg(id,classname,src){
+		   //  var d1=document.getElementById(id);
+		   //  var img=document.createElement("img");
+		   //  img.setAttribute('class',classname);
+		   //  img.src=src;
+		   //  d1.appendChild(img);
+	    // }
+
+	</script>
+</head>
+<body>
+	<div class="sc-headtit">
+		<div class="sc-headH">
+			<img src="./videorealname/portraitReservation/css/images/qietu2_02.png" alt="">
+		</div>
+		
+		<!-- <div class="head_content"> -->
+
+			<!-- <img src="./videorealname/portraitReservation/css/images/sc_haed_care.png" alt=""> -->
+		<!-- 	<p>请拍摄<span>本人</span>清晰正面<span>免冠人像</span>进行人脸认证。注意：收到号卡后需本人<span>视频认证</span>，视频认证与人脸认证需为<span>同一人</span>，否则号卡<span>无法激活</span>。</p> -->
+		<!-- </div> -->
+		
+	</div>
+	<div class="sc_photo ">
+		<div class="sc_photo_con">
+			<img id="J_open_camera" src="./videorealname/portraitReservation/css/images/图层121.png" alt="" onLoad="getSize(this,'fileselect')">
+			<!-- <img src="./videorealname/portraitReservation/css/images/sc_head_figure.png" alt="" class="sc_head_figure">
+			<img src="./videorealname/portraitReservation/css/images/sc_head_frame.png" alt="" class="sc_head_frame">
+			<img src="./videorealname/portraitReservation/css/images/sc_head_photo.png" alt="" class="sc_head_photo">
+			<p class="photo_front">拍摄正面免冠人像</p> -->
+			
+		</div>
+		<div class="file-select">
+			<form enctype="multipart/form-data" method="post" name="frtForm">
+    			<input class="fn-hide" type="file" id="fileselect"  accept="image/*" name="fileselect" capture="camera" />
+			</form>
+			<img src="./videorealname/portraitReservation/css/images/图层21.png" id="again" class="again fn-hide" alt="">
+			<!-- <img src="./videorealname/portraitReservation/css/images/bg@2x.png" id="again1" class="again1 fn-hide" alt=""> -->
+			<p class="p_position fn-hide">点击<strong>重新</strong>拍摄</p>
+		</div>
+		<div class="sc_photo_con1">
+			<p class="photo_prompt">请在光线较好环境下拍摄，并露出人像五官，面部无遮挡。</p>
+		</div>
+		
+	</div>
+
+
+	<!--弹出框标签区域-->
+<div class="ui-popup-wrap">
+	<a id="J_failure" class="popup-with-zoom-anim" href="#J_failure-dialog"></a>
+	<a id="J_onload" class="popup-with-zoom-anim" href="#J_onload-dialog"></a>
+	<!-- <a id="J_success" class="popup-with-zoom-anim" href="#J_success-dialog"></a> -->
+	<a id="J_oncheck" class="popup-with-zoom-anim" href="#J_oncheck-dialog"></a>
+
+	<div id="J_onload-dialog" class="zoom-anim-dialog mfp-hide">
+	    <div class="refresh"></div>
+	    <div class="showInfo">
+	    	<p>正在验证，请稍候...</p>
+	    </div>
+	</div>
+	<div id="J_oncheck-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="refresh"></div>
+	    <div class="tips">
+	    	<p>正在提交验证</p>
+	    </div>
+	</div>
+
+	<div id="J_failure-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="dialog-title">
+            <p>提示</p>
+        </div>
+		<div class="rtnMsg" ></div>
+	    <div class="btn-area">
+	    	<a class="cancel" style="background-color: #05cbd8;width: 100%;">
+	    		<span>确定</span>
+	    	</a>
+	    </div>
+	</div>
+</div>
+	<script src="./lib/jquery/jquery.js"></script>
+	<script src="./lib/ac.js"></script>
+	<script src="./lib/popup/magnific-popup.min.js"></script>
+	<script src="./videorealname/portraitReservation/lib/lrz.bundle.js"></script>
+	<script src="./videorealname/portraitReservation/lib/lrz.all.bundle.js"></script>
+	<script src="./common/config.js"></script>
+	<script src="./common/common.js"></script>
+	<!-- <script src="./videorealname/portraitReservation/js/common.js"></script> -->
+	<script src="./videorealname/portraitReservation/js/sc-head.js?ver=20191031"></script>
+	
+</body>
+</html>

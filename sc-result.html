@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>审核通知</title>
+<link rel="shortcut icon" href="./videorealname/portraitReservation/css/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="./lib/popup/magnific-popup.css"></link>
+<link rel="stylesheet" href="./videorealname/portraitReservation/css/common.css"></link>
+
+<!-- <script src="./videorealname/portraitReservation/js/checkagent.js"></script> -->
+	<!-- 腾讯统计 -->
+<!-- <script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500648287");
+  		mta.setAttribute("cid", "500648292");
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
+<script type="text/javascript">
+     setTimeout(function(){
+         try {
+             MtaH5.clickStat('yuyuerenzheng',{'scresult':'true'})
+         } catch (e) {
+             try {
+                 console.log(e.name + ": " + e.message);
+             } catch (e) {
+             }
+         }
+     }, 500)
+</script> -->
+
+
+<style type="text/css">
+		.result-area .result_notice .special{
+			color:#1d1d26 ;font-size: 18px;margin-bottom: 20px;
+		}
+		.result-area .result_notice .normal{
+			color:#1d1d26;
+			font-size: 18px;
+			margin: 0 5%;
+		}
+/*		.result-area .result_notice .normal i{
+			font-style: normal;
+			color:#f3b12a;
+		}*/
+		/*.result-area .result_banner{
+			width: 100%;
+			height: 20%;
+			position: fixed;
+			bottom: 0;
+		}*/
+		.prompt{
+			margin-left: 40px;
+			margin-right: 40px;
+			margin-top: 50px;
+			font-size: 13px;
+		}
+</style>
+</head>
+<body>
+	<div class="result-area">
+		<div class="result_icon">
+			<img src="./videorealname/portraitReservation/css/images/对勾.png" class="yes fn-hide"/>
+			<img src="./videorealname/portraitReservation/css/images/感叹号.png" class="no fn-hide"/>
+		</div>
+
+		<div class="result_notice score_high Successful fn-hide">
+			<p class="special">认证成功!</p>
+			<p class="normal">请耐心等待订单审核结果</p>
+		</div>
+
+		<div class="result_notice score_high prompt fn-hide">
+			<p class="special">认证失败</p>
+			<p class="special promptful"></p>
+		</div>
+
+	</div>
+		<script src="./lib/jquery/jquery.js"></script>
+		<script src="./common/common.js"></script>
+		<script type="text/javascript">
+			// var callbackURL=Util.lStorage.getParam('callbackURL');
+			// var isPopup=Util.lStorage.getParam('isPopup');
+			var isPopup=Util.browser.getParameter('isPopup')||Util.lStorage.getParam('isPopup');
+			var returnMessage=Util.lStorage.getParam('returnMessage');
+			if ( isPopup=='no') { 
+				$('.result-area .yes').hide();
+				$('.result-area .no').show();
+				$('.prompt').show();
+				$('.promptful').text(returnMessage);
+				
+			}else{
+				$('.result-area .no').hide();
+				$('.result-area .yes').show();
+				$('.Successful').show();
+			} 
+		</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http -equiv="Content-Type" charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app -capable" content="yes">
+    <meta name="apple-mobile-web-app -status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http -equiv="Expires" CONTENT="-1">
+    <meta http -equiv="Cache-Control" CONTENT="no-cache">
+    <meta http -equiv="Pragma" CONTENT="no-cache">
+    <!--seo -->
+
+
+
+<title>中国移动掌上营业厅</title>
+<meta name="keywords" content="网上营业厅,河南移动WAP掌上营业厅-中国移动通信" />
+<meta name="description" content="河南移动WAP掌上营业厅是对中国移动的产品进行在线申请、定制、变更业务等操作。为您提供部分移动增值业务和附加业务的申请和取消服务。话费服务是指中国移动向客户提供移动话费查询、话费相关功能定制或变更、在线交费等服务。">
+    <!--end seo -->
+    <!--用户插码 -->
+    <!--end 用户插码 -->
+    <!--4G专区插码 -->
+	<!--end 4G专区插码 -->	
+	<link rel="stylesheet" href="./html/css/public.css"/>
+	<link rel="stylesheet" href="./html/iconfont/iconfont.css"/>	
+    <script charset="utf-8" type="text/javascript" src="./html/js/jquery.js"></script>
+    <script charset="utf-8" type="text/javascript" src="./html/js/check_datainfo.js"></script>
+    <script>
+    function judgePlatform() {
+    if (navigator.userAgent.match(/Android/i)) {
+        return platform = "android";
+    } else if ((navigator.userAgent.indexOf('iPhone') != -1)) {
+        return platform = "iphone";
+    } else {
+        return platform = "other";
+    }
+}
+   		var channelheader='channel_HN02YO';
+   		var acid='acid_wap';
+   		 acid=(acid=='')?'acid_wap':acid;
+   		judgePlatform();
+   		if(platform=='other'){
+   		var sdc_type='pc';//插码动态名称
+   		}else{
+   		var sdc_type=(channelheader==''||channelheader=='channel_wap')?'TOUCH':'APP';//插码动态名称
+   		}
+   		var sdc_dymname=(channelheader=='')?'channel_wap':channelheader;//插码动态名称
+	   	var loginmobile="";
+	   	var loginregion="";
+    </script>
+    <meta content="always" name="referrer">
+    <script>        
+        var _udata = _udata||[];
+    </script>
+    <!-- <script src="./vconsole.min.js"></script>
+    <script>
+      // init vConsole
+      var vConsole = new VConsole();
+      console.log('Hello world');
+    </script>  -->
+</head>
+<body>
+ <header class="header">
+        <a href="javascript:return_prepage();" class="icon-left iconfont"></a>
+        <span class="header-menu-span">在线售卡</span>
+    </header>
+<script type="text/javascript">
+function return_prepage()  
+{  
+  window.history.go(-1);
+}
+$(function () {
+    //用来设置头部 header名称  页面添加 <header-menu-span>标签  xiayy add
+    var headerSpan=$('header-menu-span').text();
+    if(headerSpan!=null&&headerSpan!=undefined&&headerSpan!=""){
+        $(".header-menu-span").text(headerSpan);
+    }
+})
+</script>
+
+<form id="checkForm" method="get" action="/edcreg/saleCardMiniAppointment/signTheCheck">
+
+	<input type="hidden" id="busiCode" name="busiCode" value="" />
+
+	<input type="hidden" id="requestSource" name="requestSource" value="" />
+
+	<input type="hidden" id="transactionID" name="transactionID" value="" />
+
+	<input type="hidden" id="signature" name="signature" value="" />
+
+	<input type="hidden" id="billId" name="billId" value="" />
+
+	<input type="hidden" id="channelId" name="channelId" value="" />
+
+</form>
+
+<script>
+
+$(function() {
+  $('#busiCode').val(sessionStorage.getItem('busiCode'));
+  $('#requestSource').val(sessionStorage.getItem('requestSource'));
+  $('#transactionID').val(sessionStorage.getItem('transactionID'));
+  $('#signature').val(sessionStorage.getItem('signature'));
+  $('#billId').val(sessionStorage.getItem('billId'));
+  $('#channelId').val(sessionStorage.getItem('channelId'));
+  // $("#checkForm").submit();
+  var xhr=new XMLHttpRequest();
+  xhr.open('GET','/edcreg/saleCardMiniAppointment/signTheCheck?'+$("#checkForm").serialize(),true);
+  xhr.onreadystatechange=function(){
+      if(xhr.readyState==4){
+        window.location.href = xhr.responseURL.replace('https://smz.cmcc-cs.cn:30026/edcreg-web/videorealname/portraitReservation/','')
+      }
+  }
+  xhr.send();
+});
+
+</script>
+
+<!--宽带专用js-->
+	<script type="text/javascript" src="./html/js/sdccard_js.js"></script>
+    <script type="text/javascript">_tag.trackEvent();</script>
+<!--集团专用js-->
+<!--浮层模块st-->
+<!--浮层模块end-->
+</body>
+</html>
+<script type="text/javascript">
+document.cookie="channelheader=channel_HN02YO;path=/";
+</script>
+<!--客户端分享start-->
+<!--客户端分享end-->
+

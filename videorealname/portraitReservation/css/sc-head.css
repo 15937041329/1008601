@@ -1,0 +1,122 @@
+.sc-headH{
+	padding-top: 8px;
+	margin:0 auto;
+	/*background-color: #fff;*/
+	/*padding:6% 2%;*/
+}
+.sc-headH img{
+	width: 100%;
+	margin-top: -6px;
+}
+/*.sc-headH .head_content img{
+	height: 52px;
+	margin-top: 2%;
+	margin-right: 2%;
+}*/
+/*.sc-headH .head_content{
+	font-size: 14px;
+	display: flex;
+  	justify-content: center;
+  	font-weight: bold;
+}
+.sc-headH .head_content span{
+	font-size: 16px;
+	font-weight:bold;
+	color:rgb(247,182,38);
+}*/
+.sc_photo{
+	margin-top: 14%;
+	position: relative;
+}
+.sc_photo .sc_photo_con{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align:center;
+}
+.sc_photo .sc_photo_con img{
+	width: 80%;
+	height: 310px !important;
+}
+/*.sc_photo .sc_photo_con img.sc_head_figure{
+	width: 80%;
+}
+.sc_photo .sc_photo_con img.sc_head_frame{
+	position: absolute;
+	width: 34%;
+	top:32%;
+	left: 31%;
+}
+.sc_photo .sc_photo_con img.sc_head_photo{
+	position: absolute;
+	height: 9%;
+	top:51%;
+	left: 44%;
+}
+.sc_photo .sc_photo_con p.photo_front{
+	position: absolute;
+	top:13%;
+	left:29%;
+	color: #fff;
+	font-weight: bolder;
+	font-size:16px;
+	letter-spacing:2px
+}*/
+.sc_photo .sc_photo_con1{
+	width: 80%;
+	margin:2% auto 0;
+	font-size: 14px;
+	color: rgb(182,182,182)
+}
+.file-select{
+	position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 84%;
+}
+.file-select form input{
+	display: inline-block;
+	width: 100% !important;
+    height: 310px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 5;
+}
+.p_position{
+	position: absolute;
+	left: 0;right: 0;
+	margin: 0 auto;
+	bottom: 20%;
+	text-align: center;
+	font-size: 15px;
+	color: #fff;
+	/*z-index: 2;*/
+}
+.p_position strong{
+	color: #F7B318;
+    font-size: 18px;
+	}      
+.sc-headtit{
+	height: 100px;
+    background-color: #fff;
+}
+.again{
+	text-align: center;
+    display: block;
+    position: absolute;
+    left: 38%;
+    top: 40%;
+    width: 58px;
+    height: 58px;
+}
+/*.again1{
+	position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    }*/

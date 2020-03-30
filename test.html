@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http -equiv="Content-Type" charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app -capable" content="yes">
+    <meta name="apple-mobile-web-app -status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http -equiv="Expires" CONTENT="-1">
+    <meta http -equiv="Cache-Control" CONTENT="no-cache">
+    <meta http -equiv="Pragma" CONTENT="no-cache">
+    <!--seo -->
+
+
+
+<title>河南移动掌上营业厅</title>
+<meta name="keywords" content="网上营业厅,河南移动WAP掌上营业厅-中国移动通信" />
+<meta name="description" content="河南移动WAP掌上营业厅是对中国移动的产品进行在线申请、定制、变更业务等操作。为您提供部分移动增值业务和附加业务的申请和取消服务。话费服务是指中国移动向客户提供移动话费查询、话费相关功能定制或变更、在线交费等服务。">
+    <!--end seo -->
+    <!--用户插码 -->
+    <!--end 用户插码 -->
+    <!--4G专区插码 -->
+	<!--end 4G专区插码 -->	
+	<link rel="stylesheet" href="/html/css/public.css"/>
+	<link rel="stylesheet" href="/html/iconfont/iconfont.css"/>	
+    <script charset="utf-8" type="text/javascript" src="/html/js/jquery.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/html/js/check_datainfo.js"></script>
+    <script>
+    function judgePlatform() {
+    if (navigator.userAgent.match(/Android/i)) {
+        return platform = "android";
+    } else if ((navigator.userAgent.indexOf('iPhone') != -1)) {
+        return platform = "iphone";
+    } else {
+        return platform = "other";
+    }
+}
+   		var channelheader='channel_HN02YO';
+   		var acid='acid_wap';
+   		 acid=(acid=='')?'acid_wap':acid;
+   		judgePlatform();
+   		if(platform=='other'){
+   		var sdc_type='pc';//插码动态名称
+   		}else{
+   		var sdc_type=(channelheader==''||channelheader=='channel_wap')?'TOUCH':'APP';//插码动态名称
+   		}
+   		var sdc_dymname=(channelheader=='')?'channel_wap':channelheader;//插码动态名称
+	   	var loginmobile="";
+	   	var loginregion="";
+    </script>
+    <meta content="always" name="referrer">
+    <script>        
+        var _udata = _udata||[];
+    </script>
+</head>
+<body>
+ <header class="header">
+        <a href="javascript:return_prepage();" class="icon-left iconfont"></a>
+        <span class="header-menu-span">在线售卡</span>
+    </header>
+<script type="text/javascript">
+function return_prepage()  
+{  
+  window.history.go(-1);
+}
+$(function () {
+    //用来设置头部 header名称  页面添加 <header-menu-span>标签  xiayy add
+    var headerSpan=$('header-menu-span').text();
+    if(headerSpan!=null&&headerSpan!=undefined&&headerSpan!=""){
+        $(".header-menu-span").text(headerSpan);
+    }
+})
+</script>
+<link rel="stylesheet" href="/html/template/2.0/pay/card/css/business.css"/>
+<style>
+	body{
+   		background-color: #f0f2f2;
+	}
+</style>
+<script>
+    var addsf="河南省";
+    var addcs="开封市";
+    var addxs="尉氏县";
+    var addtw="大马";
+</script>
+<script type="text/javascript" src="/html/template/2.0/pay/card/js/public.js"></script>
+<script type="text/javascript" src="/html/template/2.0/pay/card/js/orderinfo.js"></script>
+<script type="text/javascript" src="/html/template/2.0/pay/card/js/city.js"></script>
+<script type="text/javascript" src="/html/js/loginEncry.js"></script>
+<script>
+$(function () {
+    //微信浏览器屏蔽支付宝
+    if(is_weixn()){
+        $('.zfb').hide();
+    }
+    var isShow=true;
+	var prettyNum="N";
+	var activityId=$("#activityId").val();//配置ID
+	var choosePlan=$("#choosePlan").val();//选择套餐
+	
+	//订单提交
+	$('.big-blue-btn-zhifu').click(function(){	
+	    if(!isShow){
+	    	return;
+	    }				
+		$("div").removeClass("border-red");
+		$("p").removeClass("border-red");
+		var iccid=$("#iccid").val();//实体卡ICCID
+		var cardnum=$("#cardnum").val();
+		var province=$("#citysf").val();
+		var regionstr=$("#citycs").val();
+		var phone=$("#txtPhone").val();
+		var city = $("#cityxs").val();
+		var town = $("#citytw").val();
+		var address=$("#txtAddress").val();	
+		var recsvcnum=$("#txtRecsvcnum").val();
+		var checkstr = $("#checkstr").val();
+		var paytype = $("#paytype").val();
+		var sendtype=$("#sendtype").val();//配送方式
+		
+		//配送方式为空
+		if(sendtype==null || sendtype==""){
+			showMsg("请选择配送方式");
+			$('#id-sendtype').addClass("border-red");
+			return;
+        }
+		
+	    //仅邮寄配送必选入网协议
+		if(checkstr=="" && "1"==sendtype){
+			if("Y"==prettyNum){//特需号码
+		    	showMsg("请阅读并同意《中国移动通信客户服务协议》《中国移动通信“特需号码”客户服务协议》");
+			}else{
+				showMsg("请阅读并同意《中国移动通信客户服务协议》");
+			}
+		    $("#mycheck1").focus();
+		    return;
+		}
+		
+		if(cardnum=="" || !ValidateCallNumber(cardnum)){
+			showMsg("请选择号码");
+			$("#cardnum").focus();
+			$('#id-cardnum').addClass("border-red");
+			return;
+		}
+		if($("#plancode").val()==""){
+			showMsg("号码类型有误");	
+			$("#cardnum").focus();
+			$('#id-cardnum').addClass("border-red");
+			return;
+		}
+	    
+		//到厅自取
+		if("2"==sendtype || "3"==sendtype){
+            var nameStr="txtName";
+            var cardStr="txtCard";
+            var divNameStr="id-name";
+            var divCardStr="id-card";
+		    if("3"==sendtype){//上门开户
+                nameStr="txtName1";
+                cardStr="txtCard1";
+                divNameStr="id-name1";
+                divCardStr="id-card1";
+                // if($("#region").val()!="A") {
+                //     showMsg("上门开户仅限郑州");
+                //     $('.send-method').addClass("border-red");
+                //     return;
+                // }
+			}
+            var name=$("#"+nameStr).val();
+            var card=$("#"+cardStr).val();//身份证
+			if(name==""){
+				showMsg("请输入身份证件姓名");
+                $("#"+nameStr).focus();
+                $("#"+divNameStr).addClass("border-red");
+				return;
+			}
+			if(card==""){
+				showMsg("请输入身份证号");
+                $("#"+cardStr).focus();
+                $("#"+divCardStr).addClass("border-red");
+				return;
+			}
+			var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+		    if(reg.test(card) === false){ 
+		    	showMsg("请输入正确的身份证号码");
+                $("#"+cardStr).focus();
+                $("#"+divCardStr).addClass("border-red");
+				return;	 
+			}
+		    var encry = new Encry04();		
+			$("#cardstr1").val(encry.encode(card).substring(0,4));	
+			$("#cardstr2").val(encry.encode(card).substring(4));
+			$("#namestr").val(name);
+		}else{//邮寄配送
+			if(""==$("#transactionID").val()){
+				showMsg("请前往实名认证");
+				return;
+			}
+            if(""!=$("#hnUser").val() &&  null!=$("#hnUser").val()){
+                if("1"==$("#hnUser").val()){
+                    if($("#mastercard").val()!="" && $("#mastercard").val().length >0){
+                        showMsg("非河南省用户请到营业厅办理");
+                        return;
+                    }else{
+                        showMsg("非河南用户请选择到厅自取办理开户");
+                        return;
+                    }
+                }else{
+                    showMsg($("#cMsg").val());
+                    return;
+                }
+            }
+		}
+	    
+	  	//针对通知书夹寄活动验证码
+		var vericode="";
+		if("XWAPCARDNEW4"==activityId){
+			var schoolnumber1=$("#schoolnumber1").val();
+			var schoolnumber2=$("#schoolnumber2").val();
+			if(schoolnumber1=="" || schoolnumber2==""){
+				showMsg("请输入礼包编码");
+				$("#schoolnumber1").focus();
+				$('#id-schoolnumber').addClass("border-red");
+				return;
+			}
+			vericode=schoolnumber1+""+schoolnumber2;
+		}
+		
+		if(phone==""){
+			showMsg("请输入联系电话");
+			$("#txtPhone").focus();
+			$('#id-phone').addClass("border-red");
+			return;
+		}	
+		if(!mobile_reg.test(phone) && !phone_reg.test(phone)){
+			showMsg("请输入正确的联系电话");
+			$("#txtPhone").focus();
+			$('#id-phone').addClass("border-red");
+			return;
+		}
+		if(iccid==""){//非实体卡验证收货地址
+			if(province==""){
+				showMsg("请选择所在省份");
+				$('#id-city').addClass("border-red");
+				return;
+			}
+			if(regionstr==""){
+				showMsg("请选择所在城市");
+				$('#id-city').addClass("border-red");
+				return;
+			}
+			if(city==""){
+				showMsg("请选择所在县区");
+				$('#id-city').addClass("border-red");
+				return;
+			}
+			if(province=="河南省" && town==""){
+				showMsg("请选择所在乡镇");
+				$('#id-city').addClass("border-red");
+				return;
+			}
+			//到厅自取/上门开户
+			if("2"==sendtype || "3"==sendtype){
+				var rName=$("#rName").val()+'市';//号码归属地
+				var sendtext="2"==sendtype?'到厅自取':'上门开户';
+				if(rName!=regionstr){
+					showMsg(sendtext+"所在地区必须选择号码归属地");
+					$('#id-city').addClass("border-red");
+					return;
+				}
+			}
+			if(address==""){
+				showMsg("请输入街道/镇+/小区/写字楼+门牌号");
+				$("#txtAddress").focus();
+				$('#id-address').addClass("border-red");
+				return;
+			}
+			if(address.length <4){
+				showMsg("您输入的地址过于简单，请重新输入");
+				$("#txtAddress").focus();
+				$('#id-address').addClass("border-red");
+				return;
+			}
+			if(address.length >150){
+				showMsg("您输入的地址过长，请重新输入");
+				$("#txtAddress").focus();
+				$('#id-address').addClass("border-red");
+				return;
+			}
+			if(!checkSw(address)){
+				$("#txtAddress").focus();
+				$('#id-address').addClass("border-red");
+				return;
+			}
+		}
+		
+		if(recsvcnum.length>0){
+			if(!mobile_reg.test(recsvcnum)){
+				showMsg("请输入正确的推荐人手机号");
+				$("#txtRecsvcnum").focus();
+				$('#id-recsvcnum').addClass("border-red");
+				return;
+			}
+		}
+		
+		if(paytype==""){
+			showMsg("请选择支付方式");
+			$('#id-paytype').addClass("border-red");
+			return;
+		}
+		
+	    //到厅自取设置选中入网协议
+	    if("2"==sendtype || "3"==sendtype){
+			$("#checkstr").val('1');
+		}
+	    //邮寄配送设置选中入网协议个数
+	    if("1"==sendtype){
+	    	$("#netPro").val($("#proStr").val());
+	    }
+		$("#vericode").val(vericode);
+		$("#phonestr").val(phone);
+		$("#citysfstr").val(province);
+		$("#citycsstr").val(regionstr);
+		$("#cityxsstr").val(city);
+		$("#citytwstr").val(town);
+		$("#addressstr").val(address);
+		$("#recsvcnumstr").val(recsvcnum);
+		$("#havecardtype").val(sendtype);
+		isShow = false;
+
+		//立即支付按钮增加插码
+        webTrends("ljzf","");
+
+        $.ajax({
+            type:"POST",
+            url:'/pay/card-sale!submit.action',
+            dataType:'json',
+            data: $("#checkForm").serialize(),
+            async:false,
+            success:function(htmlMsg){
+                if(htmlMsg.returnCode=='SUCCESS'){
+                    $("#orderId").val(htmlMsg.orderId);
+                    $("#signStr").val(htmlMsg.signStr);
+                    //办理成功增加插码
+                    webTrends("success","");
+                }else{
+                    $("#errMsg").val(htmlMsg.returnMessage);
+                    //办理失败增加插码
+                    webTrends("fail",htmlMsg.returnMessage);
+                }
+                $("#turnOrderForm").submit();
+            },
+            error : function(htmlMsg) {
+                showMsg("订单提交异常，请重试");
+                return;
+            },
+            timeout : function(htmlMsg) {
+                showMsg("订单提交超时，请重试");
+                return;
+            }
+        });
+	});
+
+	function webTrends(nType,msg){
+	    //立即支付
+	    if("ljzf"==nType){
+	        //页面配置类套餐
+            if(activityId=="6005410018816495462"){//全球通99元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','XHRW_QQTTCE_J','WT.ac_id','','WT.si_n','CB_XHRW_QQTTCE_J','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+            }else if(activityId=="3761246575764727212"){//全球通139元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','XHRW_QQTTCE_E','WT.ac_id','','WT.si_n','CB_XHRW_QQTTCE_E','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+            }
+            //页面非配置类套餐
+            if("1"==choosePlan || "2"==choosePlan){//副卡
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELJHK','WT.ac_id','','WT.si_n','CB_ELJHK_LJBK','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+			}else if("1344"==choosePlan){//乡音卡19元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKSJ','WT.ac_id','','WT.si_n','CB_ELXYK_LQSJ','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+            }else if("1345"==choosePlan){//乡音卡29元(10元入网)
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKEJ','WT.ac_id','','WT.si_n','CB_ELXYK_LQEJ','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+            }else if("1346"==choosePlan) {//乡音卡29元(20元入网)
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKEJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQEJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+            }else if("1347"==choosePlan) {//乡音卡49元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKSJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQSJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+            }else if("1348"==choosePlan) {//乡音卡58元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKWJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQWJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','21');}
+            }
+		}else if("success"==nType){//办理成功
+            //页面配置类套餐
+            if(activityId=="6005410018816495462"){//全球通99元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','XHRW_QQTTCE_J','WT.ac_id','','WT.si_n','CB_XHRW_QQTTCE_J','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }else if(activityId=="3761246575764727212"){//全球通139元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','XHRW_QQTTCE_E','WT.ac_id','','WT.si_n','CB_XHRW_QQTTCE_E','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }
+            //页面非配置类套餐
+            if("1"==choosePlan || "2"==choosePlan){//副卡
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELJHK','WT.ac_id','','WT.si_n','CB_ELJHK_LJBK','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }else if("1344"==choosePlan){//乡音卡19元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKSJ','WT.ac_id','','WT.si_n','CB_ELXYK_LQSJ','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }else if("1345"==choosePlan){//乡音卡29元(10元入网)
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKEJ','WT.ac_id','','WT.si_n','CB_ELXYK_LQEJ','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }else if("1346"==choosePlan) {//乡音卡29元(20元入网)
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKEJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQEJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }else if("1347"==choosePlan) {//乡音卡49元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKSJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQSJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }else if("1348"==choosePlan) {//乡音卡58元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKWJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQWJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','99');}
+            }
+
+        }else if("fail"==nType){//办理失败
+            //页面配置类套餐
+            if(activityId=="6005410018816495462"){//全球通99元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','XHRW_QQTTCE_J','WT.ac_id','','WT.si_n','CB_XHRW_QQTTCE_J','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }else if(activityId=="3761246575764727212"){//全球通139元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','XHRW_QQTTCE_E','WT.ac_id','','WT.si_n','CB_XHRW_QQTTCE_E','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }
+            //页面非配置类套餐
+            if("1"==choosePlan || "2"==choosePlan){//副卡
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELJHK','WT.ac_id','','WT.si_n','CB_ELJHK_LJBK','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }else if("1344"==choosePlan){//乡音卡19元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKSJ','WT.ac_id','','WT.si_n','CB_ELXYK_LQSJ','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }else if("1345"==choosePlan){//乡音卡29元(10元入网)
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKEJ','WT.ac_id','','WT.si_n','CB_ELXYK_LQEJ','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }else if("1346"==choosePlan) {//乡音卡29元(20元入网)
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKEJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQEJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }else if("1347"==choosePlan) {//乡音卡49元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKSJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQSJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }else if("1348"==choosePlan) {//乡音卡58元
+                if(typeof(_tag)!='undefined'){_tag.dcsMultiTrack('DCS.dcsuri','/event.gif','WT.channel',channelheader,'WT.nv','ELXYKWJS','WT.ac_id','','WT.si_n','CB_ELXYK_LQWJS','WT.mobile',loginmobile,'WT.city',loginregion,'WT.si_x','-99','WT.errCode',msg);}
+            }
+        }
+	}
+
+    let timer=null;
+    let num=2;
+    timer=setInterval(function(){
+        if(num==0){
+            clearInterval(timer);
+            $('.time').hide();
+            $('.police-tips-pop  .police-btn-box').removeClass('gray');
+            $('.police-tips-pop  .police-btn-box').addClass('close');
+            $('.police-tips-pop .close').click(function(){
+                $('.police-tips-pop').hide();
+            })
+        }
+        $('.time b').text(num);
+        num--;
+    },1000);
+});
+</script>
+<div class="main">
+    <div class="sell-telnum-order-fill">
+        <div class="selected-already">
+            <p>已选套餐</p>
+            <div class="list">
+            	<span>套餐名称</span>
+                <span class="orange-text">移动王卡-19元套餐（语音版）</span>
+            </div>
+                    </div>
+        <div class="selected-phonenum">
+            <p>选择手机号</p>
+            <div class="data-item">
+                <div class="tel-list list choice-area" id="id-selectregion"  >
+                    <span>号码归属地</span>
+                    <input type="text" id="rName" placeholder="请选择号码归属地" value="郑州" readonly/>
+                    <a href="javascript:void(0);" class="rt"><img src="/html/template/2.0/pay/card/images/order-right.png" alt=""></a>
+                </div>
+                <div class="tel-list list choice-telnum" id="id-cardnum">
+                    <span>选择手机号</span>
+                    <input type="text" id="cNum" placeholder="请选择手机号" value="15136143875" readonly/>
+                    <a href="javascript:void(0);" class="rt s-num tocard"><img src="/html/template/2.0/pay/card/images/order-right.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="net-item getorcomeobj">
+            <p>入网资料(同一身份证只能预占1个号码，多买无效)</p>           
+            <div class="list" id="id-name">
+                <span>姓名</span>
+                <input type="text" id="txtName" name="txtName" placeholder="请输入身份证件姓名" value=""/>
+            </div>
+            <div class="list" id="id-card">
+                <span>身份证</span>
+                <input type="text" id="txtCard" name="txtCard" placeholder="请输入身份证号" value=""/>
+            </div>
+        </div>
+        <div class="rece-addr">
+        	<p>联系方式</p>
+            <div id="id-phone" class="list" >
+                <span>联系电话</span>
+                <input type="number" id="txtPhone" name="txtPhone" placeholder="请输入联系电话" value="13419779935"/>
+            </div>
+            <div class="list select-add" id="id-city">
+                <span>所在地区</span>
+                <input type="text" placeholder="请选择收件地址" class="city" value="河南省开封市尉氏县大马" readonly/>
+                <a href="javascript:void(0);" class="rt selectcity"><img src="/html/template/2.0/pay/card/images/order-right.png" alt=""></a>
+            </div>
+            <div class="list" id="id-address">
+                <input type="text" id="txtAddress" name="txtAddress" placeholder="街道/镇+/小区/写字楼+门牌号" value="dsfsd f" class="street" maxlength="150"/>
+            </div>
+            <div class="list select-business-hall getobj" style="display: none">
+                <span>推荐营业厅</span>
+                <input type="text" placeholder="请选择营业厅" class="business-hall selecthall" readonly/>
+                <a href="javascript:void(0);" class="rt selecthall"><img src="/html/template/2.0/pay/card/images/order-right.png" alt=""></a>
+            </div>
+            <div class="list clearfix mode">
+                <a class="important-text" href="javascript:void(0);">重要须知</a>
+                <!--mealFeatures：2支持全国发货-->
+                <div class="ems tr sendobj">默认EMS</div>
+                <div class="ems tr getobj">请30天内去附近营业厅取卡（推荐）</div>
+            </div>
+        </div>
+        <div class="net-item real-name-rz sendobj">
+            <p>实名认证</p>
+            <div class="list">
+                    <a class="ysm" href="javascript:void(0);"></a>
+            </div>
+        </div>
+        <div class="net-item comeobj" style="display: none">
+            <p>入网资料(同一身份证只能预占1个号码，多买无效)</p>
+            <div class="list" id="id-name1">
+                <span>姓名</span>
+                <input type="text" id="txtName1" name="txtName1" placeholder="请输入身份证件姓名" value=""/>
+            </div>
+            <div class="list" id="id-card1">
+                <span>身份证</span>
+                <input type="text" id="txtCard1" name="txtCard1" placeholder="请输入身份证号" value=""/>
+            </div>
+        </div>
+        <div class="order-mesg">
+            <ul class="text-list">
+                <li>
+                    <span class="leftside lf">商品金额</span>
+                    <span class="rightside rt" id="mealPrice">￥0</span>
+                </li>
+                <li>
+                    <span class="leftside lf">运费</span>
+                    <span class="rightside rt">+0</span>
+                </li>
+                <li>
+                    <span class="leftside lf">应付总额</span>
+                    <span class="rightside important-red-text rt" id="mealPriceTotal">￥0</span>
+                </li>
+            </ul>
+        </div>
+        <div class="pay-item" id="id-paytype">
+            <p>支付方式</p>
+            <div class="pay-way list wx">
+                <div class="lf pay-text">
+                    <img src="/html/template/2.0/pay/card/images/wx.png" alt=""/>
+                    <a href="javascript:void(0)">微信支付</a>
+                </div>
+                <div class="rt">
+                    <b id="wx" class=""></b>
+                </div>
+            </div>
+            <div class="pay-way list zfb">
+                <div class="lf pay-text">
+                    <img src="/html/template/2.0/pay/card/images/pay.png" alt=""/>
+                    <a href="javascript:void(0)">支付宝支付</a>
+                </div>
+                <div class="rt">
+                    <b id="zfb" class=""></b>
+                </div>
+            </div>
+        </div>
+		<div class="contact">
+        	<p class="tit"><a href="javascript:void(0);" class="important-red-text">填写推荐人</a></p>
+            <div class="list" id="id-recsvcnum">
+                <input type="text" id="txtRecsvcnum" name="txtRecsvcnum" placeholder="请输入推荐人手机号" maxlength="11"/>
+            </div>
+        </div>
+        <div class="read-deal sendobj" id="checkDiv">
+        	<input type="checkbox"  name="mycheck1" id="mycheck1"/>
+   			<!--其它套餐-->
+   			<label for="mycheck1">我已阅读并同意<a style="cursor:pointer;" id="agree-btn1">《中国移动通信客户服务协议》</a></label>
+   			<input type="hidden" id="proStr" name="proStr" value="1">
+        </div>
+        <div class="btn-box tc zfdiv">
+            <a class="btn big-blue-btn wathet-blue-btn big-blue-btn-zhifu">立即支付</a>
+        </div>
+        <div class="blank10"></div>
+        <div class="blank20"></div>
+    </div>
+</div>
+<!-- 提示模块 -->
+<div class="pop tips-pop error-pop">
+    <div class="pop-box">
+        <div class="pop_con">
+            <h4>提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;示</h4>
+            <p class="error">请先选择电话号码</p>
+            <a href="javascript:;" class="verTrue nextButton close-btn">确&nbsp;&nbsp;定</a>
+        </div>
+    </div>
+    <div class="pop-overlay"></div>
+</div>
+<!--推荐营业厅开始-->
+<div class="pop select-business-hall-pop">
+    <div class="pop-box">
+        <div class="pop_con">
+            <a class="close-btn"><img src="/html/template/2.0/pay/card/images/close.png"></a>
+            <h4>请选择营业厅</h4>
+            <ul class="select-hall-list">
+            </ul>
+            <div class="btn_box"><a class="btn big-blue-btn wathet-blue-btn hallok">确定</a></div>
+        </div>
+    </div>
+    <div class="pop-overlay"></div>
+</div >
+<!--推荐营业厅结束-->
+
+<!--选择地市开始-->
+<div class="pop selectregion-pop">
+	<div class="pop-box">
+		<div class="pop_con">
+			<a class="close-btn" href="javascript:void(0);"><img src="/html/template/2.0/pay/card/images/close1.png"></a>
+			<ul class="select-area clearfix">
+						<li><a href="javascript:void(0);" data-cityid="A" data-cityname="郑州" class="selCity">郑州</a></li>
+						<li><a href="javascript:void(0);" data-cityid="B" data-cityname="开封" class="selCity">开封</a></li>
+						<li><a href="javascript:void(0);" data-cityid="C" data-cityname="洛阳" class="selCity">洛阳</a></li>
+						<li><a href="javascript:void(0);" data-cityid="D" data-cityname="平顶山" class="selCity">平顶山</a></li>
+						<li><a href="javascript:void(0);" data-cityid="E" data-cityname="安阳" class="selCity">安阳</a></li>
+						<li><a href="javascript:void(0);" data-cityid="F" data-cityname="鹤壁" class="selCity">鹤壁</a></li>
+						<li><a href="javascript:void(0);" data-cityid="G" data-cityname="新乡" class="selCity">新乡</a></li>
+						<li><a href="javascript:void(0);" data-cityid="H" data-cityname="焦作" class="selCity">焦作</a></li>
+						<li><a href="javascript:void(0);" data-cityid="K" data-cityname="许昌" class="selCity">许昌</a></li>
+						<li><a href="javascript:void(0);" data-cityid="S" data-cityname="信阳" class="selCity">信阳</a></li>
+						<li><a href="javascript:void(0);" data-cityid="R" data-cityname="南阳" class="selCity">南阳</a></li>
+						<li><a href="javascript:void(0);" data-cityid="U" data-cityname="济源" class="selCity">济源</a></li>
+						<li><a href="javascript:void(0);" data-cityid="J" data-cityname="濮阳" class="selCity">濮阳</a></li>
+						<li><a href="javascript:void(0);" data-cityid="P" data-cityname="周口" class="selCity">周口</a></li>
+						<li><a href="javascript:void(0);" data-cityid="L" data-cityname="漯河" class="selCity">漯河</a></li>
+						<li><a href="javascript:void(0);" data-cityid="Q" data-cityname="驻马店" class="selCity">驻马店</a></li>
+						<li><a href="javascript:void(0);" data-cityid="M" data-cityname="三门峡" class="selCity">三门峡</a></li>
+						<li><a href="javascript:void(0);" data-cityid="N" data-cityname="商丘" class="selCity">商丘</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="pop-overlay"></div>
+</div>
+<!--选择地市结束-->
+
+<!--选择号码开始-->
+<div class="pop select-num-pop">
+	<div class="pop-box">
+		<div class="pop_con">
+			<h4 class="tc">选择新手机号</h4>
+			<div class="select-num-box">
+				<input type="text" name="endStr" id="endStr" placeholder="生日、幸运数字等">
+				<div class="btn_box">
+					<a href="javascript:void(0)" class="btn orange-btn tc tocard">搜索</a>
+				</div>
+			</div>
+			<ul class="select-num-list clearfix">
+			</ul>
+			<div class="no-num tc" style="display:none">
+				 抱歉没有匹配的号码
+            </div>
+			<div class="poploading" style="display:none">
+				<div class="loadPic">
+					<img src="/html/template/2.0/pay/card/images/load.gif">
+				</div>
+				<p>正在加载，请稍后…</p>
+			</div>
+		</div>
+		<div class="change">换一批</div>
+	</div>
+	<div class="closecard"><img src="/html/template/2.0/pay/card/images/close.png"></div>
+	<div class="pop-overlay"></div>
+</div>
+<!--选择号码结束-->
+<div style="display:none" class="svcnumdiv"></div>
+
+<!--选择收货地址-->
+<div class="to-top-pop">
+    <div class="pop-overlay1"></div>
+    <div class="top-pop-box">
+        <div>
+            <select id="citysf" name="citysf">               
+            </select>
+        </div>
+        <div>
+            <select id="citycs" name="citycs">                
+            </select>
+        </div>
+        <div id="area">
+            <select id="cityxs" name="cityxs">  
+            <option value="" selected="true">请选择</option>             
+            </select>
+        </div> 
+        <div id="town" style="display:none;">
+            <select id="citytw" name="citytw">  
+            <option value="" selected="true">请选择</option>             
+            </select>
+        </div>
+        <div class="blank10"></div>
+         <div class="btn-box">
+         <a  class="btn big-blue-btn big-blue-btn-info wathet-blue-btn">确定</a>
+     </div>
+    </div>
+</div>
+<!--选择收货地址结束-->
+<!--协议开始-->
+<div class="pop agree-box1" id="agree-pop">
+	<div class="pop-box agree-box">
+		<div class="pop_con">
+			<span class="close">&times;</span>
+			<div class="xy-con">
+				<div class="agree-header"><img src="/html/template/2.0/pay/card/images/top-logo.png"/></div>
+				<h3>中国移动通信客户服务协议</h3>
+				<blockquote>
+					<p>甲方：<span class="agreeUserName">刘江涛</span>（客户）</p>
+					<p>乙方：中国移动通信集团河南有限公司<span class="agreeRegionName">郑州</span>分公司</p>
+					<p>地址：<span class="agreeRegionAdr"></span></p>
+                    <p><b>一、服务内容及服务承诺</b></p>
+                    <p>1.甲方愿意使用乙方提供的号码，或者使用甲方自其它运营商携号转网携入的号码，接受乙方提供的电信服务，乙方愿意在自有技术条件下网络覆盖范围内以及签订有漫游协议的电信运营商的网络覆盖范围内按照国家规定的电信服务标准为甲方提供电信服务，具体服务内容由甲乙双方通过签署业务受理单或其他方式另行约定。</p>
+                    <p><b>2.甲方可以自主选择是否订购第三方服务商提供的由乙方代收服务费的增值电信业务（以下简称“代收费业务”），并就此与第三方服务商产生关于该业务的合同关系。</b></p>
+                    <p>3.乙方提供的电信服务应当符合法律法规的规定及政府主管部门发布的相关标准；甲方应遵守法律法规的规定使用乙方提供的服务。</p>
+                    <p>4.乙方将通过营业网点、门户网站、10086热线等渠道公示服务项目、服务时限、服务范围及资费标准等内容。</p>
+                    <p>5.乙方向甲方提供便捷的业务办理和客户投诉受理渠道，乙方应在接到客户投诉之日起48小时内回复。</p>
+                    <p><b>二、入网登记</b></p>
+                    <p><b>1.甲方使用乙方号码或自其他运营商携号转网携入的号码，并接受乙方提供的电信服务，需办理入网登记手续。甲方办理入网登记手续时，应当按照《电话用户真实身份信息登记规定》（工业和信息化部令第25号）向乙方出示有效证件，提供真实身份信息。甲方委托他人办理入网手续的，受托人应当出示甲方和受托人的有效证件，并提供甲方和受托人的真实身份信息。甲方应具有完全的民事行为能力。甲方为无民事行为能力人或限制民事行为能力人的，应由其监护人代理甲方或依据法律规定签署本协议。单位办理入网登记手续时，除出示单位有效证件原件及加盖单位公章的证件复印件外，还应出示加盖公章的单位授权书原件及经办人有效身份证件原件。</b></p>
+                    <p><b>2.甲方或其受托人拒绝出示有效证件，拒绝依照本协议提供身份信息，冒用他人的证件的，或者使用伪造、变造的证件的，乙方有权不为其办理入网手续。</b></p>
+                    <p>3.如甲方入网登记资料发生变更，应及时到乙方营业厅或乙方指定的其他渠道办理资料完善手续。因甲方或其受托人提供的资料不详、不实或变更后未及时办理资料完善手续等原因所造成的后果由甲方自行承担。</p>
+                    <p><b>4.甲方入网后自动获取客户初始服务密码的，应立即修改初始服务密码并妥善保管。为方便办理业务，乙方可根据甲方申请以短信等方式提供随机密码，该密码可作为办理业务的临时凭证。凡使用甲方身份证件、服务密码、随机密码、通信终端办理业务的行为均被视为甲方或甲方授权的行为。因服务密码、随机密码、甲方身份证件、通信终端保管不善造成的后果由甲方自行承担。乙方有义务按照法律规定协助有关国家机关依据职权等调查相关情况。</b></p>
+                    <p><b>三、资费及费用交纳</b></p>
+                    <p> <b>1.甲乙双方确认，乙方的手机号码具备基础通话（国际及港澳台长途和漫游通话需另行申请开通）、短彩信和手机上网等基础网络功能。</b>甲方使用乙方提供的电信服务应支付相关费用，乙方收取的相关费用应符合法律法规的规定和甲乙双方的约定。</p>
+                    <p>2.甲方有权要求乙方提供免费的话费查询服务，乙方有义务对账单、详单进行解释。</p>
+                    <p><b>3.甲方应按照与乙方约定的时间、方式，向乙方交纳费用账单中记载的全部费用。甲方超过约定交费日未交足费用（以下称“欠费”），乙方有权暂停提供电信服务(以下称“欠费停机”)，并可按照所欠费用自交费日次日起每日加收3‰（千分之三）的违约金。自欠费停机之日起60日内，如甲方交清欠费和违约金的，乙方应在甲方交清欠费和违约金后的48小时内恢复暂停的服务（以下简称“复机”）。欠费停机满60日，甲方仍未交清欠费和违约金的，乙方有权终止提供电信服务（以下简称“销号”）和解除协议，并可以通过信函、公告、委托第三方等方式追缴全部欠费和违约金。</b></p>
+                    <p><b>4.甲方在欠费停机期间，停机当月和复机当月的月使用费（套餐费）照常计收。欠费停机跨整月不收取月使用费（套餐费），有特殊约定的除外。</b></p>
+                    <p><b>5.甲方可以自行申请办理停机保号业务，停机保号期间收取停机保号费。</b></p>
+                    <p><b>6.乙方对计费原始数据保留期限为6个月(系统产生用户话单当月起后6个月，含当月)。若甲方对乙方收取的费用存有异议，应在前述计费原始数据保留期限内提出。如甲方在异议费用发生6个月后才向乙方提出异议，乙方已经无法提供计费原始数据，乙方无需对甲方的异议和主张的损失承担赔偿或补偿责任。</b></p>
+                    <p>7.甲方对乙方收取的费用提出异议的，乙方有责任进行调查、解释，经核实确属乙方责任多收费用的，乙方应将已多收的部分双倍返还甲方。</p>
+                    <p><b>8.如果甲方订购第三方服务商的代收费业务，则甲方同意乙方代第三方服务商向甲方收取服务费。该服务费的资费标准由第三方服务商制订并告知甲方。若甲方对收取的代收费业务服务费有异议，可在乙方协助下与第三方服务商协商解决。</b></p>
+                    <p><b>9.甲方应妥善保管自己的号码不被非法盗用，若发现通信费用异常增长，可及时到乙方营业网点或乙方指定的其他渠道办理停机手续，并向公安机关报案；乙方应积极配合甲方和公安部门调查相关情况。</b></p>
+                    <p><b>四、协议的变更、终止与转让</b></p>
+                    <p><b>1. 乙方承诺资费方案有效期为一年（双方特殊约定的除外）。乙方有权在有效期截止后修改资费方案。如需修改，乙方应在修改前两个月通知甲方，甲方可以选择修改后的资费方案或乙方提供的其他资费方案。如无需修改，则原资费方案顺延一年，顺延次数不限。</b></p>
+                    <p><b>2.除双方另有约定外，甲方可选择变更资费方案，但只能选择乙方现行推广的资费方案。</b></p>
+                    <p><b>3.经甲乙双方协商一致，甲方可以申请将本合同中其本人的全部权利义务变更为符合条件的第三人。甲方和第三人应持双方有效证件原件到乙方营业网点办理合同主体变更（过户手续），在甲方结清所有费用后由第三人与乙方重新签订客户入网服务协议，本协议自动终止；在办理变更手续之前，因使用该号码导致的交费义务及一切后果仍由甲方承担。</b></p>
+                    <p>4.甲方可持登记的有效证件到乙方营业网点要求终止提供服务（以下简称销户）。除双方另有约定外，乙方不应拒绝甲方销户，甲方应在销户前结清所有费用。甲方通过银行代交通信费用的，甲方应在申请办理销户手续前，自行终止银行代交服务。销户90天后，乙方可以重新启用甲方原号码。</p>
+                    <p><b>5.甲方在未参与赠送、销售优惠等营销活动情况下，销户时，可预约将余额一次性转入另一乙方有效号码的账户；甲方在参与赠送、销售优惠等营销活动情况下，费用余额按营销活动协议约定进行处理。</b></p>
+                    <p>6.如遇政府主管部门对资费等相关内容的政策发生变化，乙方将根据相关要求，对原资费方案进行相应调整。调整后方案的具体执行时间以乙方公示为准。</p>
+                    <p><b>7.有下列情况之一的，乙方有权解除本协议，收回号码，终止提供服务，由此造成的后果由甲方自行承担：（1）甲方（包括受托人）提供的证件或资料虚假不实；（2）利用乙方提供的服务从事违法犯罪活动；（3）利用乙方提供的服务从事损害社会公共利益或违背公序良俗的活动；（4）乙方收到国家有关部门或司法机关的通知要求停止向甲方提供通信服务或要求乙方履行相关义务的；（5）甲方欠费满60日仍未交纳费用。</b></p>
+                    <p><b>8.如果甲方丧失民事主体资格，本协议自动终止，乙方有权作销户处理，收回号码，终止提供电信服务。</b></p>
+                    <p><b>五.携号转网</b></p>
+                    <p>1.甲方申请携号转网服务的相关权利义务说明如下：</p>
+                    <p>（1）甲方有权依据国家携号转网相关的有效规定，向乙方申请携号转网。</p>
+                    <p>（2）乙方根据甲方申请，为甲方办理携号转网过程中，乙方需要将必要的甲方资料提供给携号转网集中业务管理系统，以用于比对携入方和携出方登记的号码使用人身份信息是否一致。</p>
+                    <p>（3）甲方办理携号转网（包括转入、转出）应符合相关条件并提供所需要的材料。甲方携号转网的条件及所需要的材料，乙方已通过营业网点、门户网站、10086热线等渠道进行公示。</p>
+                    <p>2.甲方向乙方申请将号码携出至其他运营商网络的，在完成网络切换后，乙方终止向甲方提供电信服务。甲方应在完成网络切换后30日内或在收到账单后10日内向乙方结清携出时未出账的费用。甲方超过约定交费日未交足费用的，乙方有权按照所欠费用自交费日次日起每日加收3‰（千分之三）的违约金，且乙方有权将甲方欠费信息共享给甲方的携入方运营商，并委托携入方运营商向甲方代为追缴甲方所欠费用及违约金。</p>
+                    <p>3.甲方携带其他运营商号码与乙方签订本协议的，乙方有权根据携出方运营商的委托，代其追缴甲方在号码携出时未结清的携出方运营商的电信费用及违约金，追缴方式包括但不限于从甲方话费账户中扣减。</p>
+                    <p><b>六、隐私和通信权益保护</b></p>
+                    <p>1.甲方的通信自由和通信秘密不受侵犯，乙方对甲方的客户资料和通信信息负有保密义务。但根据法律、行政法规规定，司法、行政机关依法要求乙方提供协助和配合，乙方应给予协助和配合的，不构成违反保密义务。</p>
+                    <p><b>2.甲方个人信息是指以电子或者其他方式记录的能够单独或者与其他信息结合识别甲方身份或者反映甲方活动情况的各种信息。乙方收集、使用甲方个人信息，应当遵循合法、正当、必要的原则。</b></p>
+                    <p><b>3.甲方理解并同意，乙方及其关联公司可通过业务受理系统登记、纸质档案，通过网络接收、读取并记录等方式，以提供电信服务为目的，在业务活动中收集、使用甲方提供的和甲方使用服务过程中形成的个人信息。乙方有权依法对包含甲方在内的整体用户数据进行分析并加以利用。未经甲方同意，乙方不向除乙方关联公司外的第三方提供甲方个人信息。甲方可以通过营业厅或乙方指定的其他渠道，对其个人信息进行查询、更正。</b></p>
+                    <p>4.乙方应严格按照《网络安全法》、《全国人民代表大会常务委员会关于加强网络信息保护的决定》、《电信和互联网用户个人信息保护规定》（工业和信息化部令第24号）、《电话用户真实身份信息登记规定》（工业和信息化部令第25号）等法律法规的相关要求，对其在提供服务过程中收集、使用的甲方个人信息履行保护义务。</p>
+                    <p><b>5.甲方不得利用乙方提供的服务从事违法犯罪活动或违背公序良俗的活动，不得发送违法信息或未经接收客户同意发送骚扰信息，不得有拨打骚扰电话等不当行为，否则，乙方可以暂停向甲方提供服务，直至终止服务。</b></p>
+                    <p><b>七、特别提示</b></p>
+                    <p>1.甲方应使用取得国家入网许可并具有进网许可标志的终端设备，该终端设备应具有支持其所选服务的相应功能。<b>由于甲方使用未取得国家入网许可的终端设备或自行增加、删除应用程序造成的不利后果，甲方自行承担。</b></p>
+                    <p><b>2. 甲方或其受托人已详细阅读本协议的全部条款，甲方或其受托人在签署本协议后即视为完全理解并同意接受本协议的全部条款。</b></p>
+                    <p><b>3.甲方使用的号码如是销号后重新启用的号码，如号码销号前在银行、微信、淘宝等第三方机构办理了手机号码绑定业务（包含但不限于银行自动支付话费、接收费用变更提醒等），且在销号前未解除绑定，甲方可能会收到第三方机构的相关服务短信。如遇此种情况，甲方可联系第三方机构解除所绑定的业务，乙方将予以必要的协助。</b></p>
+                    <p><b>4.甲方将手机号码与银行、微信、淘宝等第三方机构提供的业务进行绑定，属于甲方和第三方机构的合同约定。为保护甲方的个人隐私和财产安全，甲方在更换手机号码、过户或销户前，需主动与第三方机构联系解除绑定关系。如甲方未解除有关绑定，因此产生的纠纷，以及发生对甲方不利的任何后果，乙方将不承担任何责任。</b></p>
+                    <p><b>5.甲方办理了促销合约又要求提前终止的，应承担违约责任。</b></p>
+                    <p><b>6.甲方号码仅限甲方本人使用，擅自转借、转让给他人使用，由此产生的包括但不限于欠费、违法犯罪等后果和法律责任均由甲方承担；一旦发现，乙方有权立即采取关停号码、解除合同等措施。7.根据河南省通信管理局、河南省公安厅有关规定，对被认定为通讯信息诈骗不良信用电话用户的，视情节轻重程度在一定期限内限制其办理相关通信业务。</b></p>
+                    <p><b>八、争议解决</b></p>
+                    <p>本协议项下发生的争议，甲乙双方应协商解决。<b>协商不成的，双方可向电信管理部门、消费者协会等有关部门投诉，或向<b class="line">乙方住所地</b>人民法院提起诉讼。</b></p>
+                    <p><b>九、其他</b></p>
+                    <p>1.甲方办理各类业务所签署的业务受理单、表单、协议等为本协议的补充协议，与本协议冲突部分以补充协议为准，补充协议中未约定部分以本协议为准。</p>
+                    <p>2.乙方关联公司是指乙方现在或将来控制、受控制或与其处于共同控制下的任何公司、机构以及上述公司或机构的合法继承人。其中“控制”是指直接或间接地拥有影响所提及公司管理的能力，无论是通过所有权、有投票权的股份、合同或其他被人民法院认定的方式。</p>
+                    <p>3.乙方有权在必要时变更本协议条款。乙方变更本协议条款的，将以包括但不限于在营业网点告示、门户网站公告等方式中的一种或多种，向甲方发送本协议的变更情况，甲方可以根据上述方式查阅相关的变更协议条款。本协议条款变更且乙方及时通过上述方式通知甲方后，如果甲方继续使用乙方提供的电信服务，即视为甲方已接受变更后的协议。如果甲方不接受变更后的协议，可向乙方申请销户或携号转网。</p>
+                    <p>4.双方联系方式位于签章处，一方如有变更，应及时通知另一方，未及时通知的，一方按照原有地址发送文件（包括但不限于解除合同的通知）发出后即视为送达。</p>
+                    <p>5. 本协议经甲方勾选我已阅读并同意后生效。对本协议未尽事宜，双方另行协商解决。</p>
+                    <p>6.甲乙双方同意在办理各项业务时可通过乙方系统使用手写签名设备签署（以下简称无纸化签署）入网协议、业务受理单等各类文件。<b>双方确认,甲方通过无纸化方式签署法律文件,与在纸质法律文件上手写签名或盖章具有同等法律效力,无须另行签署纸质法律文件。甲方在无纸化签署之前,应仔细阅读所签署的法律文件内容。</b></p>
+                    <p class="margin-no">&nbsp;&nbsp;</p>
+		            <p>甲方：<span class="agreeUserName">刘江涛</span><br>
+		               甲方移动号码：<span class="agreeCardnum"></span><br>
+		               签署日期：<span class="agreeSignDate"></span>
+		            </p>
+		            <p class="margin-no">&nbsp;&nbsp;</p>
+            		<p>乙方: 中国移动通信集团河南有限公司<span class="agreeRegionName">郑州</span>分公司<br>
+		                签署日期：<span class="agreeSignDate"></span>
+		            </p>
+		            <p class="agree-footer-logo"><img src="/html/template/2.0/pay/card/images/footer-logo.png"></p>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+	<div class="pop-overlay"></div>
+</div>
+<!--协议结束-->
+<!--新增的《中国移动通信“特需号码”客户服务协议》协议开始-->
+<div class="pop" id="agree-pop-txkh">
+	<div class="pop-box agree-box">
+		<div class="pop_con">
+			<span class="close">&times;</span>
+			<div class="xy-con">
+				<div class="agree-header"><img src="/html/template/2.0/pay/card/images/top-logo.png"/></div>
+				<h3 style="font-size: 1.4rem;">中国移动通信“特需号码”客户服务协议</h3>
+				<blockquote>
+					<p>甲方：<span class="agreeUserName">刘江涛</span>（客户）</p>
+					<p>乙方：中国移动通信集团河南有限公司<span class="agreeRegionName">郑州</span>分公司</p>
+					<p>地址：<span class="agreeRegionAdr"></span></p>
+					<p>甲乙双方本着诚信自愿的原则，达成如下协议：</p>
+					<p><b>一、活动内容</b></p>
+					<p>1、根据甲方要求，乙方向甲方提供特需号码 ：<span class="agreeCardnum"></span>，供甲方使用。</p>
+					<p>2、甲方自愿选择号码开通/使用 套餐：移动王卡-19元套餐（语音版），套餐费19元，甲方并承诺在使用本号码期间不降低套餐费用标准。</p>
+					<p><strong>二、活动约定</strong></p>
+					<p>1、本协议签订后，甲方承诺该特需号码仅用作本人使用乙方提供的通信服务之目的，并承诺在本人使用期间的任何时候不要求乙方为对该特需号码办理停机保号和转网（即转入其他电信运营商）等任何改变双方合同关系、合同内容的事务。甲方如不再使用该特需号码或者不再使用乙方提供的通信服务，可申请办理销号，解除本协议。</p>
+					<p>2、甲方承诺在新入网后3年内不能办理过户业务，新机主在过户后的3年内不能再次办理过户业务。</p>
+					<p>3、根据双方的约定，甲方在选择乙方的套餐时，乙方已经给予了甲方、甲方也实际享有了乙方承诺的优惠，同时乙方给予甲方优惠在先，因此甲方特需号码如果未在合约期内按约达到向乙方承诺的套餐费，并且该费用不包括代其他号码支付的话费金额以及通过手机支付购买其他第三方产品发生的费用。甲方承诺将差额部分作为违约金由乙方在当月末一次性予以补收。</p>
+					<p>4、为防止不法分子盗用客户特需号码，保障甲方合法权利，遇有甲方需要办理该号码的补卡业务时，乙方承诺仅接受甲方本人凭自己的有效身份证原件办理。</p>
+					<p>5、甲方认可：号码资源属国家所有、有偿使用、不可再生，是乙方业务发展所必不可少的重要资源，甲方对本协议所承诺使用的特需号码要妥善保管，保证本人使用，任何情况下不以任何形式转让该号码或交由包括甲方的亲人、朋友在内的其他任何人使用该号码，否则乙方有权解除本协议。</p>
+					<p>6、除本协议另有约定外，如甲方未能按约履行，视为甲方违约，乙方有权解除本协议；乙方可在解除本协议时直接停止该特需号码的通信服务，并收回该特需号码，因此造成投诉、索赔的，甲方承诺自行处理并全额承担赔偿责任，给乙方造成的损失甲方也承诺全额赔偿。甲方同时承诺，甲方已经交纳的自由话费及分摊话费中的剩余部分作为违约金由乙方扣收。</p>
+					<p><strong>三、其它条款</strong></p>
+					<p>1、本协议自甲方确认同意后生效，活动所涉及的电信服务期限为1年（本协议有效期为1年），到期后如无甲方违约，亦无不可抗力事件影响协议履行，经甲、乙双方协商一致，协议有效期可延长一年，以此类推。在协议有效期内，因技术进步致乙方提供给甲方的服务内容发生变化的，由双方协商解决；乙方针对该技术进步推出新的资费套餐的，甲方也可要求使用不低于本协议约定标准的新套餐，经双方协商一致后办理变更手续。</p>
+					<p>2、本协议项下发生的争议，双方可协商解决，协商不成的，双方同意向乙方所在地人民法院提起诉讼解决</p>
+					<p>3、本协议内容如与甲乙双方所签订的《中国移动通信客户服务协议》内容有不一致的，以本协议内容为准。</p>
+					<p><strong>四、甲方确认在点击同意本协议之前已认真阅读上述协议内容，且乙方对协议内容已尽合理提示及说明义务，甲方完全理解并且没有任何异议！</strong></p>
+					<p class="margin-no">&nbsp;</p>
+					<p>甲方:<span class="agreeUserName">刘江涛</span><br>
+	                   甲方移动号码：<span class="agreeCardnum"></span><br>
+	                   签署日期：<span class="agreeSignDate"></span>
+	                </p>
+	                <p class="margin-no">&nbsp;</p>
+	                <p>乙方: 中国移动通信集团河南有限公司<span class="agreeRegionName">郑州</span>分公司<br>
+	                    签署日期：<span class="agreeSignDate"></span>
+	                </p>
+					<p class="margin-no">&nbsp;</p>
+					<p class="agree-footer-logo"><img src="/html/template/2.0/pay/card/images/footer-logo.png"></p>
+					<p class="margin-no">&nbsp;</p>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+	<div class="pop-overlay"></div>
+</div>
+<!--协议结束-->
+
+<!-- 重要须知提示模块(到厅自取) -->
+<div class="pop tips-pop tips-pop2 send-dtzq">
+    <div class="pop-box">
+        <div class="pop_con">
+            <h4>配送方式说明</h4>
+            <div class="text-box">
+                <p>1、您所选号码均有提示所属地及区域，请于下单并支付成功次日起30天内携带与网上开户时登记一致的本人居民有效身份证件原件到号码归属地市区域内的移动营业厅取号办理，逾期系统将取消订单并退款。</p>
+                <p>2、根据国家工信部“实名制”政策要求，请本人持有效身份证件到营业厅取卡并完成实名制认证，具体以营业厅现场办理流程为准。</p>
+            </div>
+            <a href="javascript:;" class="verTrue nextButton close-btn">确&nbsp;&nbsp;定</a>
+        </div>
+    </div>
+    <div class="pop-overlay"></div>
+</div>
+
+<!-- 重要须知提示模块(邮寄配送)-->
+<div class="pop tips-pop tips-pop2 send-shsm">
+    <div class="pop-box">
+        <div class="pop_con">
+            <h4>配送方式说明</h4>
+            <div class="text-box">
+                <p>1、订单完成支付后，请于下单并支付成功次日起30天内完成在线实名认证，认证成功后方可使用。若于30天内未完成激活，号码将自动回收。</p>
+                <p>2、在线选号邮寄配送业务，一般为支付成功后3个工作日内寄出。</p>
+                <p>3、您可关注“河南移动10086”微信公众号，回复关键字“新号码激活”，进入实名认证首页，根据提示完成在线实名认证。</p>
+                <p>4、号卡签收后，如用户已进行在线实名认证激活并想取消订单，需用户自行前往营业厅进行销户，销户规则详询各地营业厅。</p>
+                            </div>
+            <a href="javascript:;" class="verTrue nextButton close-btn">确&nbsp;&nbsp;定</a>
+        </div>
+    </div>
+    <div class="pop-overlay"></div>
+</div>
+
+<!-- 重要须知提示模块(上门开户) -->
+<div class="pop tips-pop tips-pop2 send-shkh">
+    <div class="pop-box">
+        <div class="pop_con">
+            <h4>配送方式说明</h4>
+            <div class="text-box">
+                <p>1、号码归属地市与派送地市必须一致；</p>
+                <p>2、有工作人员提前联系，请保持电话通畅；</p>
+                <p>3、上门开户必须本人带身份证件办理，不可代领、不可放置快递柜，请提前安排好时间。</p>
+            </div>
+            <a href="javascript:;" class="verTrue nextButton close-btn">确&nbsp;&nbsp;定</a>
+        </div>
+    </div>
+    <div class="pop-overlay"></div>
+</div>
+
+
+<form id="checkForm" method="post" action="/pay/card-sale!submit.action">
+<input type="hidden" id="region" name="region" value="A" />
+<input type="hidden" id="cardnum" name="cardnum"  value="15136143875" />
+<input type="hidden" id="mastercard" name="mastercard" value="" />
+<input id="cardstr1" name="cardstr1"  type="hidden" /> 
+<input id="cardstr2" name="cardstr2"  type="hidden" /> 
+<input type="hidden" id="namestr" name="namestr"  />
+<input type="hidden" id="phonestr" name="phonestr"  />
+<input type="hidden" id="citysfstr" name="citysfstr"  />
+<input type="hidden" id="citycsstr" name="citycsstr"  />
+<input type="hidden" id="cityxsstr" name="cityxsstr"  />
+<input type="hidden" id="citytwstr" name="citytwstr"  />
+<input type="hidden" id="addressstr" name="addressstr"  />
+<input type="hidden" id="recsvcnumstr" name="recsvcnumstr"  />
+<input type="hidden" id="checkstr" value="" name="checkstr"  />
+<input type="hidden" id="paytype" name="paytype" value="" />
+<input type="hidden" id="havecardtype" name="havecardtype"/>
+<input type="hidden" id="busiHall" name="busiHall" value=""/>
+<input type="hidden" id="busiHallAddress" name="busiHallAddress" value=""/>
+<input type="hidden" id="iccid" name="iccid" value=""/>
+<input type="hidden" id="plancode" name="plancode" value="XWAPH5FXNCS" />
+<input type="hidden" id="picNameRPath" name="picNameRPath" value="BOSS371108520200304232504310193_R.jpg" />
+<input type="hidden" id="netPro" name="netPro" value=""/>
+<input type="hidden" id="sendtype" name="sendtype" value="1"/>
+<input type="hidden" id="transactionID" name="transactionID" value="37199020200304232459670248" />
+<input type="hidden" id="activityId" name="activityId" value="8887114130170729424" />
+<input type="hidden" id="channelCode" name="channelCode" value="E001" />
+<input type="hidden" id="planId" name="planId" value="1234" />
+<input type="hidden" id="planName" name="planName" value="移动王卡-19元套餐（语音版）" />
+<input type="hidden" id="planActivityId" name="planActivityId" value="434" />
+<input type="hidden" id="hnUser" name="hnUser" value=""/>
+<input type="hidden" id="cMsg" name="cMsg" value=""/>
+<input type="hidden" id="prettyNum" name="prettyNum" value="N"/>
+<input type="hidden" id="choosePlan" name="choosePlan" value="" />
+<input type="hidden" id="chooseOffer" name="chooseOffer" value="434" />
+<input type="hidden" id="studentTransID" name="studentTransID" value="" />
+<input type="hidden" id="mealFeatures" name="mealFeatures" value="2,3" />
+</form>
+<form id="turnOrderForm" method="post" action="/pay/card-sale!turnOrder.action">
+    <input type="hidden" id="errMsg" name="errMsg" value="" />
+    <input type="hidden" id="orderId" name="orderId"  value="" />
+    <input type="hidden" id="signStr" name="signStr" value="" />
+</form>
+<!--宽带专用js-->
+	<script type="text/javascript" src="/html/js/sdccard_js.js"></script>
+    <script type="text/javascript">_tag.trackEvent();</script>
+<!--集团专用js-->
+<!--浮层模块st-->
+<!--浮层模块end-->
+</body>
+</html>
+<script type="text/javascript">
+document.cookie="channelheader=channel_HN02YO;path=/";
+</script>
+<!--客户端分享start-->
+<!--客户端分享end-->

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="" content=""/>
+<title>身份认证</title>
+<link rel="shortcut icon" href="./videorealname/portraitReservation/css/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="./lib/popup/magnific-popup.css"></link>
+<link rel="stylesheet" href="./videorealname/portraitReservation/css/common.css"></link>
+<link rel="stylesheet" href="./videorealname/portraitReservation/css/sc-pic.css?ver=20190716"></link>
+<script src="./common/checkAgent.js"></script>
+<!-- <script src="./vconsole.min.js"></script>
+    <script>
+      // init vConsole
+      var vConsole = new VConsole();
+      console.log('Hello world');
+    </script>  -->
+<!-- 腾讯统计 -->
+<script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500648287");
+  		mta.setAttribute("cid", "500648292");
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
+<script type="text/javascript">
+     setTimeout(function(){
+         try {
+             MtaH5.clickStat('yuyuerenzheng1',{'scpic':'true'})
+         } catch (e) {
+             try {
+                 console.log(e.name + ": " + e.message);
+             } catch (e) {
+             }
+         }
+     }, 500)
+</script>
+
+<script src="./lib/jquery/jquery.js"></script>
+<script type="text/javascript">
+    function getSize(obj,iptObj){
+        maxWidth = $(obj).width(),
+        maxHeight = $(obj).height();
+        $('#'+iptObj).width(maxWidth).height(maxHeight);
+        $('#'+iptObj).css("top",$(obj).position().top);
+    }
+    // function creatImg(id,classname,src){
+	   //  var d1=document.getElementById(id);
+	   //  var img=document.createElement("img");
+	   //  img.setAttribute('class',classname);
+	   //  img.src=src;
+	   //  d1.appendChild(img);
+    // }
+
+</script>
+
+</head>
+
+<body>
+<!-- <div id="meng" ></div>  -->
+<div id="J_front_wrap" class="ui-content">
+	<!-- <img class="bgtop" src="css/images/图层16.png"> -->
+	<div id="J_front_check" class="ui-content-head clears" >
+
+		<section>
+			<!-- <div class="watch">
+				<img src="css/images/图层16.png" class="watch-con" alt="">
+			</div> -->
+			<img src="./videorealname/portraitReservation/css/images/默认1.png" class="tit" alt="">
+			<!-- <p class="hint">根据国家对通信产品的 <span>实名制要求</span>，需要您真实拍摄清晰 <span>无水印</span> 的证件照片，我们将严格保护您的身份信息安全。</p> -->
+		</section>
+		<ul id="J_front_info_show" class="ui-content-frontCheck-info tab_head_list" style="display: none;">
+	        <li style="margin-top:1%;font-size:14px;">
+	        	<span>姓名</span>
+				<span><input type="text" name="userName" id="userName" value="" placeholder="请输入姓名" maxlength="30"/></span>
+				<i id="edit_icon"></i>	
+	        </li>
+	        <li>
+				<span class="ui-form-label">身份证号码</span>
+				<span id="idNum"></span>
+	        </li>
+	        <li style="margin-bottom:1%;">
+	        	<span class="ui-form-label">有效期限</span>
+	        	<span id="valid_period"></span>
+			</li>
+		</ul>
+	</div>
+	<div class="ui-content-center id_show" id="box">
+		<!-- <img class="bgstep_1" src="css/images/word2@2x.png">
+		<img class="bgstep1_3" src="css/images/Compound@2x.png"> -->
+		<p class="title">第一步：拍摄身份证头像面</p>
+		<div class="img-size" id="psz">
+			<!-- <img class="bgstep_2" src="css/images/head@2x.png"> -->
+			<img src="./videorealname/portraitReservation/css/images/水印.png" class="watermark1  p_hide" >
+			<img id="J_open_camera" src="./videorealname/portraitReservation/css/images/tianjia_01@2x.png" onLoad="getSize(this,'fileselect')"/>
+			<img src="./videorealname/portraitReservation/css/images/图层20.png" id="sucz" class="suez  p_hide">
+			<img src="./videorealname/portraitReservation/css/images/图层21.png" id="again" class="again p_hide">
+			<img src="./videorealname/portraitReservation/css/images/bg@2x.png"  id="Mongo" class="Mongo p_hide">
+			<!-- <img src="css/images/chongpai@2x.png"  id="Mongo3" class="Mongo p_hide"> -->
+			<p class="p_position fai1 p_hide">识别失败，请<strong>重新</strong>拍摄</p>
+			<p class="p_position succ1 p_hide">识别成功</p>	
+	        <p class="p_position takPic1">拍摄身份证<strong>头像</strong>所在面</p> 
+
+		</div>
+	</div>
+	<div class="ui-content-center id_show" id="box1">
+	 	<form enctype="multipart/form-data" method="post" name="frtForm1">
+		        <input type="file" id="fileselect1" accept="image/*" name="fileselect1" capture="camera">
+		</form>
+		<!-- <img class="bgstep_1" src="css/images/word1@2x.png">
+		<img class="bgstep2_3" src="css/images/Compound@2x.png"> -->
+		<p class="title">第二步：拍摄身份证国徽面</p>
+		<div class="img-size" id="psf">
+			<!-- <img class="bgstep_2" src="css/images/Emblem@2x.png"> -->
+			<img src="./videorealname/portraitReservation/css/images/水印.png" class="watermark2 p_hide" >
+			<img id="J_open_cameraF"  src="./videorealname/portraitReservation/css/images/tianjia_02@2x.png" onLoad="getSize(this,'fileselect1');getSize(this,'opacityBox')"/>
+	        <img src="./videorealname/portraitReservation/css/images/图层20.png" id="sucf" class="suef p_hide">
+	        <img src="./videorealname/portraitReservation/css/images/图层21.png" id="again2" class="again2 p_hide">
+	        <img src="./videorealname/portraitReservation/css/images/bg@2x.png"  id="Mongo2" class="Mongo2 p_hide">
+
+			<p class="p_position fai2 p_hide">识别失败,请<strong>重新</strong>拍摄</p>
+			<p class="p_position succ2 p_hide">识别成功</p>
+	        <p class="p_position takPic2">拍摄身份证<strong>国徽</strong>所在面</p> 
+			<div class="opacityBox" id="opacityBox"></div>
+		</div>		
+	</div>
+	<!-- <div style="height: 60px;"></div> -->
+	<!-- <img class="bgdown" src="css/images/btn@2x.png"> -->
+</div>
+
+<div class="ui-frontcheck-btn">
+   	<div id="J_behind_check_next" class="ui-btn-wrap-next" style="background-color: #b1c1c1;z-index: 12;" >
+     	<span>下一步</span>
+    </div>
+</div>
+
+
+<!--弹出框标签区域-->
+<div class="ui-popup-wrap">
+	<a id="J_failure" class="popup-with-zoom-anim" href="#J_failure-dialog"></a>
+	<a id="J_onload" class="popup-with-zoom-anim" href="#J_onload-dialog"></a>
+	<a id="J_success" class="popup-with-zoom-anim" href="#J_success-dialog"></a>
+	<a id="J_oncheck" class="popup-with-zoom-anim" href="#J_oncheck-dialog"></a>
+	<!-- <a id="J_ensure" class="popup-with-zoom-anim" href="#J_ensure-dialog"></a> -->
+	<a id="J_pcz" class="popup-with-zoom-anim" href="#J_pcz-dialog"></a>
+	<a id="J_pcf" class="popup-with-zoom-anim" href="#J_pcf-dialog"></a>
+
+	<div id="J_pcz-dialog" class=" mfp-hide">
+		<!-- <img src="css/images/shape@2x.png" alt=""> -->
+		<div class="dialog-title">
+			拍摄规范
+		</div>
+		<div class="rtnMsg" >
+			<img src="./videorealname/portraitReservation/css/images/front.png" alt="" class="con">
+			
+		</div>
+		<div class="sure_diag">
+			<span>我知道了</span>
+				 <form enctype="multipart/form-data" method="post" name="frtForm">
+		            <input type="file" id="fileselect" accept="image/*" name="fileselect" capture="camera">
+		        </form>
+		</div>
+	</div>
+	<div id="J_pcf-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="dialog-title">
+			拍摄规范
+		</div>
+		<div class="rtnMsg" >
+			<img src="./videorealname/portraitReservation/css/images/behind.png" alt="" class="con">	
+			<!-- <span>请真实拍摄本人身份证原件，否则卡号无法激活。</span> -->
+		</div>
+		<div class="sure_diag">
+			<span>我知道了</span>
+				 <!--  <form enctype="multipart/form-data" method="post" name="frtForm1">
+		            <input type="file" id="fileselect1" accept="image/*" name="fileselect1" capture="camera">
+		        </form> -->
+		</div>
+	</div>
+
+
+	<div id="J_onload-dialog" class="zoom-anim-dialog mfp-hide">
+	    <div class="refresh"></div>
+	    <div class="showInfo">
+	    	<p>上传需要约10秒，请稍候...</p>
+	    </div>
+	</div>
+
+	<div id="J_success-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="succeed"></div>
+	    <div class="tips">
+	    	<p>提交成功</p>
+	    </div>
+	</div>
+
+	<div id="J_oncheck-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="refresh"></div>
+	    <div class="tips">
+	    	<p>正在提交验证</p>
+	    </div>
+	</div>
+
+	<div id="J_failure-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="dialog-title">
+            <p>提示</p>
+        </div>
+		<!-- <div class="dialog-con"> -->
+			<div class="rtnMsg rtnMsg0" ></div>
+		<!-- </div> -->
+	    <div class="btn-area">
+	    	<a class="cancel" style="background-color: #05cbd8;width: 100%;">
+	    		<span>确定</span>
+	    	</a>
+	    </div>
+	</div>
+</div>
+
+ <form action="" method="post" id="logonForm" style="display: none;">
+    　　<table cellpadding="0" cellspacing="0" border="0">
+    　　　　<tr height="50">
+    　　　　　　<td>
+    　　　　　　　　<input type="hidden"  id="provCode" name="provCode" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　　　<input type="hidden"  id="transactionId" name="transactionId" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　</td>
+    　　　　</tr>
+    　　　　<tr height="50">
+    　　　　　　<td>
+    　　　　　　　　<input type="hidden" id="jumpNum" name="jumpNum" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　　　<input type="hidden"  id="busiType" name="busiType" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　</td>
+    　　　　</tr>
+    　　　　<tr height="50">
+    　　　　　　<td>
+    　　　　　　　　<input type="hidden" id="sourceCode" name="sourceCode" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　　　<input type="hidden"  id="billId" name="billId" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　</td>
+    　　　　</tr>
+    	<tr height="50">
+    　　　　　　<td>
+    　　　　　　　　<input type="hidden" id="inputTransactionId" name="inputTransactionId" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　　
+    　　　　　　</td>
+    　　　　</tr>
+        <tr height="50">
+    　　　　　　<td>
+    　　　　　　　　<input type="hidden" id="channelId" name="channelId" style="line-height:20px; height:20px;width: 150px;"/>
+    　　　　　　</td>
+    　　　　</tr>
+    　　</table>
+    </form>
+<!--<div style="height:300px;"></div>-->
+<!-- <script src="./lib/jquery/jquery.js"></script> -->
+<script src="./lib/popup/magnific-popup.min.js"></script>
+<script src="./lib/ac.js"></script>
+<script src="./videorealname/portraitReservation/lib/lrz.bundle.js"></script>
+<script src="./videorealname/portraitReservation/lib/lrz.all.bundle.js"></script>
+<script src="./common/config.js"></script>
+<script src="./common/common.js"></script>
+<script src="./videorealname/portraitReservation/js/common.js?ver=20191031"></script>
+<script src="./videorealname/portraitReservation/js/sc-pic.js?ver=20191031" defer="defer"></script>
+</body>
+</html>

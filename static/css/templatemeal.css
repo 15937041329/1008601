@@ -1,0 +1,359 @@
+.standard-sellNum-btnBox{
+	position:fixed;
+	left:0px;
+	bottom:0px;
+	width:100%;
+	background:#f2f2f2;
+	padding:1rem;
+	border-top:1px solid #b5b5b5;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.standard-sellNum-btnBox .price{
+	font-size:1.4rem;
+	color:#4c4c4c;
+	padding-right:10px;
+}
+.standard-sellNum-btnBox .price span{
+	font-size:1.4rem;
+	color:#e40077;
+}
+.standard-sellNum-btnBox .price span.blue-text{
+	color: rgba(0,133,208,1);
+}
+.standard-sellNum-btnBox .price b{
+	color:#e40077;
+	font-size:2.4rem;
+	font-weight:200;
+}
+.standard-sellNum-btnBox .price b.blue-text{
+	color: rgba(0,133,208,1);
+}
+.standard-sellNum-btnBox .btnBox{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+.standard-sellNum-btnBox .btnBox .standard-btn{
+	display:inline-block;
+	width:100%;
+	padding:1rem 0px;
+	font-size:1.6rem;
+	font-weight:400;
+	text-align:center;
+	white-space:nowrap;
+	vertical-align:middle;
+	touch-action:manipulation;
+	cursor:pointer;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	background-image:none;
+	border-radius:0.4rem;
+}
+.standard-sellNum-btnBox .btnBox .standard-btn.blue-btn{
+	background:rgba(0,133,208,1);
+	color:#fff;
+}
+.standard-sellNum-btnBox .btnBox .standard-btn.pink-btn{
+	background:rgba(228,0,119,1);
+	color:#fff;
+}
+.standard-sellNum-btnBox .btnBox .standard-btn.transparentPinkbtn{
+	background:rgba(228,0,119,0.8);
+	color:#fff;
+}
+.standard-sellNum-btnBox .btnBox .standard-btn.transparentBluebtn{
+	background:rgba(0,133,208,0.8);
+	color:#fff;
+}
+
+
+/**透明按钮**/
+.standard-transparent-btnbox{
+	width: 100%;
+	z-index: 100;
+	position: fixed;
+	bottom: 0px;
+	border-top: 1px solid #d9d9d9;
+}
+.standard-transparent-btnbox a{
+	display:block;
+	padding:10px 0;
+	font-size:2.4rem;
+	color:#fff;
+}
+.standard-transparent-btnbox a.blue-btn{
+	background:#0085d0;
+	background:rgba(0,133,208,.8);
+}
+.standard-transparent-btnbox a.pink-btn{
+	background:#e40077;
+	background:rgba(228,0,119,0.8);
+}
+
+.zindex20{
+    z-index: 20;
+}
+.new-card-template {
+    max-width: 640px;
+    margin: 0 auto;
+    padding-bottom: 68px;
+}
+.new-card-template img {
+    width: 100%;
+}
+.new-card-template a{
+    display: block;
+}
+.new-card-template .card-panel {
+    padding: 0 1rem;
+}
+.new-card-template .card-panel section.sel-level{
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0,0,0,.3);
+    background: #fff;
+    padding: 2rem 1rem;
+}
+.new-card-template .card-panel section.sel-level1{
+    margin-top: 10px;
+}
+.new-card-template .card-panel .swiper-button-next{
+    background-image: url(../images/arrow-right.png);
+    right:0;
+}
+.new-card-template .card-panel .swiper-button-prev{
+    background-image: url(../images/arrow-left.png);
+    left:0;
+}
+.new-card-template .card-panel .swiper-button-next,
+.new-card-template .card-panel .swiper-button-prev{
+    border-radius: 3px;
+    background-color: #d0d0d0;
+    width: 20px;
+    height: 30px;
+    -moz-background-size: 50% auto;
+    -webkit-background-size:  50% auto;
+    background-size: 50% auto;
+}
+.new-card-template .card-panel .swiper-container .swiper-slide{
+    width:50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.new-card-template .card-panel .swiper-container .swiper-slide a{
+    display:block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    border-radius: 20px;
+}
+.new-card-template .card-panel section.sel-level2{
+    position: relative;
+    margin: 1.4rem 0 1rem;
+    background: -webkit-linear-gradient(bottom,#f9f0d5,#fff); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(bottom,#f9f0d5,#fff); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(bottom,#f9f0d5,#fff); /* Firefox 3.6 - 15 */
+    background: linear-gradient(bottom,#f9f0d5,#fff); /* 标准的语法 */
+}
+.new-card-template .card-panel section.sel-level2:before{
+    content: '';
+    width: 12px;
+    height: 50px;
+    background: url(../images/zzrzk-rope.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 3.5rem;
+    top: -3rem;
+}
+.new-card-template .card-panel section.sel-level2:after{
+    content: '';
+    width: 12px;
+    height: 50px;
+    background: url(../images/zzrzk-rope.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 3.5rem;
+    top: -3rem;
+}
+.new-card-template .card-panel section.sel-level2 .sel-act{
+    margin: 1.2rem 0 0;
+}
+.new-card-template .card-panel section.sel-level2 .sel-act li{
+    float: left;
+    border-radius: 6px;
+    margin:1%;
+    width: 48%;
+}
+.new-card-template .card-panel section.sel-level li.only-one{
+    width: 100%;
+    margin: 0;
+}
+.new-card-template .pro-intro,.new-card-template .tariff-detail,.new-card-template .buy-know,.new-card-template .net-entry-activity{
+    width: 100%;
+    background: #fff;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+.new-card-template .pro-intro img:first-of-type,.new-card-template .tariff-detail img:first-of-type,.new-card-template .buy-know img:first-of-type,.new-card-template .net-entry-activity img:first-of-type{
+    padding: 1rem 0;
+}
+.new-card-template .tariff-detail .tar-statement-entry img ,.new-card-template .buy-know .act-statement-entry img{
+    padding: 0;
+}
+.new-card-template .tar-statement,.new-card-template .active{
+    display: none;
+}
+/**选择号码 begin**/
+.orange-num{
+	color:#fb5015;
+	font-size:2rem;
+	font-weight:700;
+}
+.selected-num{
+    border-top:1px solid #f1f1f1;
+    padding: 1rem;
+	background-color:#fff;
+}
+.selected-num p{
+    font-size: 1.4rem;
+    color: #666;
+}
+/**选择号码 end**/
+/**198靓号**/
+.pretty-num-198 {
+    max-width: 640px;
+    margin: 0 auto;
+    margin: 0 auto;
+}
+.pretty-num-198 .orange-num{
+	color:#fb5015;
+	font-size:2rem;
+	font-weight:700;
+}
+.pretty-num-198 .selected-num{
+    border-top:1px solid #f1f1f1;
+    padding: 1rem;
+	background-color:#fff;
+}
+.pretty-num-198 .selected-num p{
+    font-size: 1.4rem;
+    color: #666;
+}
+.pretty-num-198 .banner img {
+    width: 100%;
+}
+.pretty-num-198 .pro-intro,.pretty-num-198 .tariff-detail,.pretty-num-198 .buy-know{
+    width: 100%;
+    background: #fff;
+    margin-top: 1rem;
+    padding: 1rem 0;
+}
+.pretty-num-198 .pro-intro a{
+    display:block;
+}
+.pretty-num-198 .pro-intro img,.pretty-num-198 .tariff-detail img,.pretty-num-198 .buy-know img,.pretty-num-198 .active img{
+    width: 100%;
+}
+.pretty-num-198 .pro-intro img:first-of-type,.pretty-num-198 .tariff-detail img:first-of-type,.pretty-num-198 .buy-know img:first-of-type{
+    padding: 1rem 0;
+}
+.pretty-num-198 .tar-statement{
+    display: none;
+}
+.pretty-num-198 .active{
+    display: none;
+    background:#fff;
+    margin-top:10px;
+}
+/**20180109**/
+
+.pt0{
+    padding-top:0 !important;
+}
+.pretty-num-198 .first-screen{
+    height:100vh;
+    background:#fff;
+}
+.pretty-num-198 .banner img{
+    display: block;
+    width: auto;
+    margin: 0 auto;
+}
+.pretty-num-198 .banner a{
+    display:block;
+}
+.pretty-num-198 .banner .banner-img{
+    height: 37Vh;
+    margin-bottom: 4Vh;
+}
+.pretty-num-198 .banner .card{
+    height: 24Vh;
+    margin-bottom: 4Vh;
+}
+.pretty-num-198 .banner .details-btn img{
+    height: 2.7Vh;
+}
+.pretty-num-198 .banner .handle-btn img{
+    height: 8Vh;
+    margin-bottom: 4Vh;
+}
+.standard-sellNum-btnBox .btnBox .standard-btn.red-btn{
+    background:#cb181b;
+    color:#fff;
+}
+@media screen and (min-height: 650px){
+    .pretty-num-198 .banner .banner-img{
+        height: auto;
+        width: 100Vw;
+        margin-bottom: 5Vh;
+    }
+    .pretty-num-198 .banner .card{
+        width:100Vw;
+        height: auto;
+        margin-bottom: 5Vh;
+    }
+    .pretty-num-198 .banner .details-btn img{
+        width: 100Vw;
+        height: auto;
+    }
+    .pretty-num-198 .banner .handle-btn img{
+        width:100Vw;
+        height: auto;
+        margin-bottom: 5Vh;
+    }
+}
+.new-card-template .card-panel section.sel-level2.sel-activity{
+    padding: 0;
+}
+.standard-sellNum-btnBox .price img.act-price{
+    width: 3.8rem;
+    vertical-align: baseline;
+}
+.new-card-template .return{
+    position: fixed;
+    right: 0;
+    top:66%;
+    width: 14%;
+    z-index: 100;
+    display: none;
+}
+@media screen and (max-height: 480px){
+    .new-card-template .return{
+        top:76%;
+    }
+}
+@media screen and (min-height: 740px){
+    .new-card-template .return{
+        top:76%;
+    }
+}
